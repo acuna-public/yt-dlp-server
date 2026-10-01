@@ -1,6 +1,6 @@
 # REST API server for yt-dlp
 
-A convenient and powerful production-ready REST API server for `yt-dlp` built with **FastAPI**.
+A convenient and powerful production-ready REST API server for [yt-dlp](https://github.com/yt-dlp/yt-dlp) built with **FastAPI**.
 Provides a fully automated background service that allows you to download videos and
 whole playlists, smart proxy rotation and cookies support. Working as REST HTTP service so you can
 use it as backend for you multi-language applications which supports network layer HTTP queries.
