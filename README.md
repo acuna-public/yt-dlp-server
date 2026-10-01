@@ -89,7 +89,8 @@ Downloads video
 
 #### Body Parameters:
 - `name` (Optional): Preferred filename without extension (will be an `yt-dlp` default if not set).
-- `download_dir` (Required): Folder where video will be downloaded.
+- `download_dir` (Optional): Folder where video will be downloaded. If not set - videos will
+be downloaded to the root folder (where server installed).
 - `type` (Optional): Type of the downloaded video (audio or video).
 If you set `audio` - only audio stream will be downloaded.
 - `embed` (Optional): Data type to embed in video file. Set it to dictionary `{'metadata': {}}`
@@ -113,7 +114,8 @@ Downloads whole playlist videos
 
 #### Body Parameters:
 - `name` (Optional): Preferred filename without extension (will be an `yt-dlp` default if not set).
-- `download_dir` (Required): Folder where all videos will be downloaded.
+- `download_dir` (Optional): Folder where all videos will be downloaded. If not set - videos will
+be downloaded to the root folder (where server installed).
 - `type` (Optional): Type of the downloaded video (audio or video).
 If you set `audio` - only audio stream will be downloaded.
 - `embed` (Optional): Data type to embed in video file. Set it to dictionary `{'metadata': {}}`
