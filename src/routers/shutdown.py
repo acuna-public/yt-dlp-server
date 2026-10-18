@@ -15,7 +15,7 @@ router = APIRouter (
 def shutdown_server ():
 	os.kill (os.getpid (), signal.SIGINT)
 
-@router.get ('')
+@router.post ('')
 def shutdown (
 	background_tasks: BackgroundTasks
 ) -> ApiResponse:
