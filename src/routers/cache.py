@@ -5,7 +5,7 @@ from schema import ApiResponse
 from utils import make_response, ydl_info
 
 router = APIRouter (
-  prefix = '/cache',
+  prefix = '/clean_cache',
   tags = ['Cache']
 )
 
