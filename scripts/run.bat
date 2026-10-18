@@ -1,3 +1,10 @@
-.venv\Scripts\python.exe run.py
+@echo off
 
+cd /d "%~dp0"
+
+cd ..
+
+.venv\Scripts\python.exe src\run.py
+
+echo.
 pause
