@@ -9,7 +9,7 @@ router = APIRouter (
   tags = ['Cache']
 )
 
-@router.delete ('')
+@router.post ('')
 def clean_cache () -> ApiResponse:
 	
 	ydl_info.cache.remove ()
