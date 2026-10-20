@@ -66,13 +66,13 @@ The server will boot up on `http://127.0.0.1:8000` waiting for service the queri
 Getting the video info by its identifier.
 
 #### Query Parameters:
-- `url` (Required): Full video url. All yt-dlp services are supported.
+- `url` (Required): Full video url. All services are supported which yt-dlp supported.
 
 #### Body Parameters:
 - `proxies` (Optional): A JSON-encoded string array containing proxy endpoints.
 Supports IPv4, IPv6, and SOCKS5.
 
-
+---
 
 **`GET /playlist?url=your_playlist_url`**
 
@@ -84,6 +84,8 @@ Getting the playlist info by its identifier.
 #### Body Parameters:
 - `proxies` (Optional): A JSON-encoded string array containing proxy endpoints.
 Supports IPv4, IPv6, and SOCKS5.
+
+---
 
 **`PUT /video?url=your_video_url`**
 
@@ -98,9 +100,6 @@ Downloads video
 be downloaded to the root folder (where server installed).
 - `type` (Optional): Type of the downloaded video (audio or video).
 If you set `audio` - only audio stream will be downloaded.
-- `embed` (Optional): Data type to embed in video file. Set it to dictionary `{'metadata': {}}`
-to add metadata to the video file. For another types use `params` to add custom `YoutubeDL`
-parameters like `writethumbnail`, `writesubtitles`, `writeautomaticsub` etc.
 - `params` (Optional): custom `YoutubeDL` parameters (`sleep_interval`, `max_sleep_interval`,
 `ratelimit` etc.). Follow `yt-dlp` API manual to get its list.
 - `proxies` (Optional): A JSON-encoded string array containing proxy endpoints.
@@ -109,6 +108,8 @@ Supports IPv4, IPv6, and SOCKS5.
 #### Headers:
 - `X-Exists-Action` (Optional): Strategy for existing files.
 Options: `skip` (default), `rename`, `smaller`, `error`.
+
+---
 
 **`PUT /playlist?url=your_video_url`**
 
@@ -123,9 +124,6 @@ Downloads whole playlist videos
 be downloaded to the root folder (where server installed).
 - `type` (Optional): Type of the downloaded video (audio or video).
 If you set `audio` - only audio stream will be downloaded.
-- `embed` (Optional): Data type to embed in video file. Set it to dictionary `{'metadata': {}}`
-to add metadata to the video file. For another types use `params` to add custom `YoutubeDL`
-parameters like `writethumbnail`, `writesubtitles`, `writeautomaticsub` etc.
 - `params` (Optional): custom `YoutubeDL` parameters (`sleep_interval`, `max_sleep_interval`,
 `ratelimit` etc.). Follow `yt-dlp` API manual to get its list.
 - `proxies` (Optional): A JSON-encoded string array containing proxy endpoints .
