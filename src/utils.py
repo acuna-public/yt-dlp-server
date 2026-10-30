@@ -117,48 +117,84 @@ def process_single_video (
 		
 		if payload.type == 'audio':
 			
-			ydl_info.params['postprocessors'] += [
-				{
-					
-					'key': 'FFmpegExtractAudio',
-					'preferredcodec': 'm4a',
-					
-				}
-			]
-		
+			ydl_info.params['postprocessors'] += [{
+				
+				'key': 'FFmpegExtractAudio',
+				'preferredcodec': 'm4a',
+				
+			}]
+			
 		if 'writethumbnail' in payload.params:
 			
-			ydl_info.params['postprocessors'] += [
-				{
-					
-					'key': 'EmbedThumbnail',
-					'already_have_thumbnail': False,
-					
-				}
-			]
+			ydl_info.params['postprocessors'] += [{
+				
+				'key': 'EmbedThumbnail',
+				'already_have_thumbnail': False,
+				
+			}]
 			
-		ydl_info.params['postprocessors'] += [
-			{
-				
-				'key': 'FFmpegMetadata',
-				
-				'add_metadata': True,
-				'add_chapters': True,
-				
-			}
-		]
+		ydl_info.params['postprocessors'] += [{
+			
+			'key': 'FFmpegMetadata',
+			
+			'add_metadata': True,
+			'add_chapters': True,
+			
+		}]
 		
 		if 'writesubtitles' in payload.params or 'writeautomaticsub' in payload.params:
 			
-			ydl_info.params['postprocessors'] += [
-				{
+			ydl_info.params['postprocessors'] += [{
+				
+				'key': 'FFmpegEmbedSubtitle',
+				'already_have_subtitle': False,
+				
+			}]
+			
+		if 'sponsorblock' in payload.params:
+			
+			if 'api' not in payload.params['sponsorblock']:
+				payload.params['sponsorblock']['api'] = 'https://sponsor.ajay.app'
+			
+			if 'categories' not in payload.params['sponsorblock'] or not payload.params['sponsorblock']['categories']:
+				
+				payload.params['sponsorblock']['categories'] = [
 					
-					'key': 'FFmpegEmbedSubtitle',
-					'already_have_subtitle': False,
+					'sponsor',
+					'selfpromo',
+					'interaction', # Subscribe reminders
+					#'intro',
+					#'outro',
+					'preview', # Can be spoilers so skip it by default
+					#'hook', # Greetings
+					#'filler', # Distracted jokes
+					'music_offtopic', # Non-music fragments in music videos
 					
-				}
-			]
-	
+				]
+				
+			ydl_info.params['postprocessors'] += [{
+				
+				'key': 'SponsorBlock',
+				'api': payload.params['sponsorblock']['api'],
+				'categories': payload.params['sponsorblock']['categories'],
+				'when': 'after_filter',
+				
+			}]
+			
+			if 'chapter_title' not in payload.params['sponsorblock'] or not payload.params['sponsorblock']['chapter_title']:
+				payload.params['sponsorblock']['chapter_title'] = '[SponsorBlock]: %(category_names)l'
+			
+			ydl_info.params['postprocessors'] += [{
+				
+				'key': 'ModifyChapters',
+				'force_keyframes': False,
+				'remove_chapters_patterns': [],
+				'remove_ranges': [],
+				'remove_sponsor_segments': set (),
+				'sponsorblock_chapter_title': payload.params['sponsorblock']['chapter_title'],
+				
+			}]
+			
 	# pprint.pprint (ydl_info.params)
 	
 	# YoutubeDL class is completely stateful. The constructor initializes the internal postprocessor pipeline once upon
